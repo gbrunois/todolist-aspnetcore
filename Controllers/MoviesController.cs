@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Web.MoviesApi.Models;
@@ -16,9 +17,9 @@ namespace Web.MoviesApi.Controllers
 
         // GET server/api/movies/:id
         [HttpGet("{id}")]
-        public Movie Get(int id)
+        public Movie Get(string id)
         {
-            return Data.MoviesDAO.GetMovie(id);
+            return Data.MoviesDAO.GetMovie(Guid.Parse(id));
         }
 
         // POST server/api/movies
@@ -41,9 +42,9 @@ namespace Web.MoviesApi.Controllers
 
         // DELETE server/api/movies/:id
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public void Delete(string id)
         {
-            Data.MoviesDAO.DeleteMovie(id);
+            Data.MoviesDAO.DeleteMovie(Guid.Parse(id));
         }
     }
 
