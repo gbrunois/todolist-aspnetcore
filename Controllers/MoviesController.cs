@@ -10,13 +10,13 @@ namespace Web.MoviesApi.Controllers
     [Route("server/api/[controller]")]
     public class MoviesController : Controller
     {
-
         private readonly IMoviesRepository _moviesDAO;
 
         public MoviesController(IMoviesRepository moviesDAO)
         {
             _moviesDAO = moviesDAO;
         }
+
         // GET server/api/movies
         [HttpGet]
         public async Task<IEnumerable<Movie>> Get()
