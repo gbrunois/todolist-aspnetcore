@@ -28,7 +28,11 @@ namespace Web.MoviesApi.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var movie = await _moviesDAO.GetMovie(Guid.Parse(id));
+            Guid identifier;
+            if(!Guid.TryParse(id, out identifier)) {
+                return BadRequest("Invalid id");
+            }
+            var movie = await _moviesDAO.GetMovie(identifier);
             if (movie == null)
             {
                 return NotFound();
