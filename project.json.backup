@@ -31,11 +31,7 @@
   },
   "publishOptions": {
     "include": [
-      "wwwroot",
-      "Dockerfile.debug",
-      "Dockerfile",
-      "docker-compose.debug.yml",
-      "docker-compose.yml"
+      "wwwroot"
     ]
   },
   "tools": {
