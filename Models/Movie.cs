@@ -47,6 +47,6 @@ namespace Web.MoviesApi.Models
         [BsonElement("price")]
         [Range(1, 100)]
         [DataType(DataType.Currency)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
     }
 }

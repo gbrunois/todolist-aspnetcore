@@ -1,5 +1,4 @@
 use admin;
-db.adminCommand({authSchemaUpgrade: 1});
 db.createUser(
     {
         user: "siteUserAdmin",
@@ -7,6 +6,9 @@ db.createUser(
         roles: [{ role: "userAdminAnyDatabase", db: "admin" }]
     }
 );
+db.auth("siteUserAdmin", "unPasswordQuiVaBien");
+db.adminCommand({authSchemaUpgrade: 1});
+
 use angularmovies;
 db.createUser(
     {
@@ -15,4 +17,5 @@ db.createUser(
         roles: ["dbOwner"]
     }
 );
+db.auth("angularUser", "password");
 db.createCollection("movies");

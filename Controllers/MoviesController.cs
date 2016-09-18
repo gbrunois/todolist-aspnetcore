@@ -42,7 +42,7 @@ namespace Web.MoviesApi.Controllers
 
         // POST server/api/movies
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Post([FromBody]Movie value)
         {
             if (!ModelState.IsValid)
@@ -55,7 +55,7 @@ namespace Web.MoviesApi.Controllers
 
         // PUT server/api/movies
         [HttpPut]
-        [ValidateAntiForgeryToken]
+        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Put([FromBody]Movie value)
         {
             if (!ModelState.IsValid)
