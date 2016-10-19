@@ -1,6 +1,11 @@
 #!/bin/bash
 
 projectName="angularmovie-aspnetcore"
+DOCKER_IP="localhost"
+
+if [ -n "$DOCKER_MACHINE_NAME" ]; then 
+    DOCKER_IP=$(docker-machine ip $DOCKER_MACHINE_NAME); 
+fi
 
 # Kills all running containers of an image and then removes them.
 cleanAll () {
@@ -55,9 +60,16 @@ dockerComposeMongoUp () {
     docker-compose -f $composeFileName -p $projectName up -d
 }
 
-# Test
-testApi () {
-    
+openSite () {
+  url=$1
+  printf 'Opening site'
+  until $(curl --output /dev/null --silent --head --fail $url); do
+    printf '.'
+    sleep 1
+  done
+
+  # Open the site.
+  open $url
 }
 
 # Shows the usage for the script.
@@ -96,6 +108,7 @@ else
     "dockerComposeBuildUp")
             dockerComposeBuild
             dockerComposeUp
+            openSite http://$DOCKER_IP:5000
             ;;
     "dockerComposeMongoBuildUp")
             dockerComposeMongoBuild
@@ -103,9 +116,6 @@ else
             ;;
     "clean")
             cleanAll
-            ;;
-    "test")
-            test
             ;;
     *)
             showUsage
