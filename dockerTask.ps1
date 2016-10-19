@@ -58,7 +58,9 @@ function DockerComposeBuild () {
     $composeFileName = "$projetDir\docker-compose.yml"
 
     Write-Host "Building the project."
+    Push-Location $projetDir
     npm install
+    Pop-Location
 
     Write-Host "Building the image $imageName."
     docker-compose -f $composeFileName -p $projectName build
