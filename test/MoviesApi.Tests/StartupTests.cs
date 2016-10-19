@@ -11,7 +11,7 @@ namespace Web.MoviesApi.Tests
 {
     public class StartupTests
     {
-        private readonly string _ContentRoot  = Path.Combine(Directory.GetCurrentDirectory(), "src/MoviesApi");
+        private readonly string _ContentRoot = Path.Combine(Directory.GetCurrentDirectory(), "../../src/MoviesApi");
 
         public StartupTests()
         {

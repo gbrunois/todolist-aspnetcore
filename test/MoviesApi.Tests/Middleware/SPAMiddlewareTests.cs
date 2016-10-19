@@ -12,7 +12,7 @@ namespace Web.MoviesApi.Tests.Middleware
 {
     public class SPAMiddlewareTests
     {
-        private readonly string _ContentRoot  = Path.Combine(Directory.GetCurrentDirectory(), "src/MoviesApi");
+        private readonly string _ContentRoot  = Path.Combine(Directory.GetCurrentDirectory(), "../../src/MoviesApi");
 
         public SPAMiddlewareTests()
         {
