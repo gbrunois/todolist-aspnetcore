@@ -22,8 +22,6 @@ namespace Web.MoviesApi.Tests.Middleware
         [Fact]
         public async void Should_Always_Serve_DefaultFile()
         {
-            
-
             //  Arrange
             var hostBuilder = new WebHostBuilder()
                 .Configure(app =>

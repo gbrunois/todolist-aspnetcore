@@ -39,10 +39,11 @@ Param(
 )
 
 $projectName="angularmovie-aspnetcore"
+$projetDir="src\MoviesApi"
 
 # Kills all running containers of an image and then removes them.
 function CleanAll () {
-    $composeFileName = "docker-compose.yml"
+    $composeFileName = $projetDir\"docker-compose.yml"
     
     docker-compose -f "$composeFileName" -p $projectName down --rmi all
 
@@ -54,7 +55,7 @@ function CleanAll () {
 
 # Builds the Docker image.
 function DockerComposeBuild () {
-    $composeFileName = "docker-compose.yml"
+    $composeFileName = $projetDir\"docker-compose.yml"
 
     Write-Host "Building the project."
     npm install
@@ -65,7 +66,7 @@ function DockerComposeBuild () {
 
 # Builds the Docker image MongoDB.
 function DockerComposeMongoBuild () {
-    $composeFileName="docker-compose.mongo.yml" 
+    $composeFileName=$projetDir\"docker-compose.mongo.yml" 
   
     Write-Host "Building the image MongoDB."
     docker-compose -f $composeFileName -p $projectName build
@@ -73,7 +74,7 @@ function DockerComposeMongoBuild () {
 
 # Run docker-compose.
 function DockerComposeUp () {
-    $composeFileName = "docker-compose.yml"
+    $composeFileName = $projetDir\"docker-compose.yml"
 
     Write-Host "Running compose file $composeFileName"
     docker-compose -f $composeFileName -p $projectName kill
@@ -82,7 +83,7 @@ function DockerComposeUp () {
 
 # Run docker-compose MongoDB.
 function DockerComposeMongoUp () {
-    $composeFileName = "docker-compose.mongo.yml"
+    $composeFileName = $projetDir\"docker-compose.mongo.yml"
 
     Write-Host "Running compose file $composeFileName"
     docker-compose -f $composeFileName -p $projectName kill
