@@ -14,12 +14,12 @@ Les données sont stockées dans une base MongoDB.
 * Ouvrir le terminal
 * Se placer à la racine du projet
 * Pour Mac/Linux, exécuter <code>./dockerTask.sh dockerComposeBuildUp</code>
-* Pour Windows, exécuter <code>C:\PS> .\dockerTask.ps1 -DockerComposeBuildUp</code>
+* Pour Windows, exécuter <code>powershell.exe -File dockerTask.ps1 -DockerComposeBuildUp</code>
 
 ## Développement
 * Pré-requis : Installer [.NET Core SDK](https://www.microsoft.com/net/core)
 * Pour Mac/Linux <code>./dockerTask.sh dockerComposeMongoBuildUp</code> pour créer et exécuter l'image docker MongoDB
-* Pour Windows <code>C:\PS> .\dockerTask.ps1 -DockerComposeMongoBuildUp</code> pour créer et exécuter l'image docker MongoDB
+* Pour Windows <code>powershell.exe -File dockerTask.ps1 -DockerComposeMongoBuildUp</code> pour créer et exécuter l'image docker MongoDB
 
 * Exécuter <code>npm install</code> pour restaurer les paquets NPM
 * Exécuter <code>dotnet restore</code> pour restaurer les paquets Nuget
