@@ -1,19 +1,39 @@
 <#
 .SYNOPSIS
-Builds and runs a Docker image.
+Builds and Run a Docker image.
 .PARAMETER DockerComposeBuild
 Builds a Docker image.
+.PARAMETER DockerComposeUp
+Run docker-compose.
+.PARAMETER DockerComposeBuildUp
+Build ans run docker-compose.
 .PARAMETER DockerComposeMongoBuild
 Builds a Docker image MongoDB.
+.PARAMETER DockerComposeMongoUp
+Run docker-compose MongoDB.
+.PARAMETER DockerComposeMongoBuildUp
+Build and run docker-compose MongoDB.
 .PARAMETER Clean
 Removes the image angularmovie-aspnetcore and kills all containers based on that image.
 
 .EXAMPLE
-C:\PS> .\dockerTask.ps1 -Build
+C:\PS> .\dockerTask.ps1 -DockerComposeBuild
 Build a Docker image
 #>
 
 Param(
+    [Parameter(Mandatory=$True,ParameterSetName="DockerComposeBuild")]
+    [switch]$DockerComposeBuild,
+    [Parameter(Mandatory=$True,ParameterSetName="DockerComposeUp")]
+    [switch]$DockerComposeUp,
+    [Parameter(Mandatory=$True,ParameterSetName="DockerComposeBuildUp")]
+    [switch]$DockerComposeBuildUp,
+    [Parameter(Mandatory=$True,ParameterSetName="DockerComposeMongoBuild")]
+    [switch]$DockerComposeMongoBuild,
+    [Parameter(Mandatory=$True,ParameterSetName="DockerComposeMongoUp")]
+    [switch]$DockerComposeMongoUp,
+    [Parameter(Mandatory=$True,ParameterSetName="DockerComposeMongoBuildUp")]
+    [switch]$DockerComposeMongoBuildUp,
     [Parameter(Mandatory=$True,ParameterSetName="Clean")]
     [switch]$Clean
 )
@@ -51,6 +71,24 @@ function DockerComposeMongoBuild () {
     docker-compose -f $composeFileName -p $projectName build
 }
 
+# Run docker-compose.
+function DockerComposeUp () {
+    $composeFileName = "docker-compose.yml"
+
+    Write-Host "Running compose file $composeFileName"
+    docker-compose -f $composeFileName -p $projectName kill
+    docker-compose -f $composeFileName -p $projectName up -d
+}
+
+# Run docker-compose MongoDB.
+function DockerComposeMongoUp () {
+    $composeFileName = "docker-compose.mongo.yml"
+
+    Write-Host "Running compose file $composeFileName"
+    docker-compose -f $composeFileName -p $projectName kill
+    docker-compose -f $composeFileName -p $projectName up -d
+}
+
 # Call the correct function for the parameter that was used
 if($DockerComposeBuild) {
     DockerComposeBuild
@@ -58,11 +96,19 @@ if($DockerComposeBuild) {
 elseif($DockerComposeUp) {
     DockerComposeUp
 }
+elseif($DockerComposeBuildUp) {
+    DockerComposeBuild
+    DockerComposeUp
+}
 elseif($DockerComposeMongoBuild) {
     DockerComposeMongoBuild
 }
 elseif($DockerComposeMongoUp) {
     DockerComposMongoUp
+}
+elseif($DockerComposeMongoBuildUp) {
+    DockerComposeMongoBuild
+    DockerComposeMongoUp
 }
 elseif ($Clean) {
     CleanAll

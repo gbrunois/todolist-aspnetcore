@@ -35,7 +35,7 @@ dockerComposeMongoBuild () {
     docker-compose -f $composeFileName -p $projectName build
 }
 
-# Runs docker-compose.
+# Run docker-compose.
 dockerComposeUp () {
   
     composeFileName="docker-compose.yml"
@@ -45,7 +45,7 @@ dockerComposeUp () {
     docker-compose -f $composeFileName -p $projectName up -d
 }
 
-# Runs docker-compose mongoDB only.
+# Run docker-compose mongoDB only.
 dockerComposeMongoUp () {
   
     composeFileName="docker-compose.mongo.yml"
@@ -67,8 +67,8 @@ showUsage () {
   echo "Commands:"
   echo "    dockerComposeBuild: Builds a Docker image (Web server and MongoDB)."
   echo "    dockerComposeBuildMongo: Builds a Docker image (MongoDB)."
-  echo "    dockerComposeUp: Runs docker-compose."
-  echo "    dockerComposeMongoUp: Runs docker-compose.mongo"
+  echo "    dockerComposeUp: Run docker-compose."
+  echo "    dockerComposeMongoUp: Run docker-compose.mongo"
   echo "    dockerComposeBuildUp: Build and run docker-compose"
   echo "    dockerComposeMongoBuildUp: Build and run docker-compose (MongoDB)"
   echo "    clean: Removes the image '$projectName' and kills all containers based on that image."
