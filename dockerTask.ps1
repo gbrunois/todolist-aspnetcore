@@ -89,6 +89,29 @@ function DockerComposeMongoUp () {
     docker-compose -f $composeFileName -p $projectName up -d
 }
 
+# Opens the remote site
+function OpenSite ([string]$url) {
+    Write-Host "Opening site" -NoNewline
+    $status = 0
+
+    #Check if the site is available
+    while($status -ne 200) {
+        try {
+            $response = Invoke-WebRequest -Uri $url -Headers @{"Cache-Control"="no-cache";"Pragma"="no-cache"} -UseBasicParsing
+            $status = [int]$response.StatusCode
+        }
+        catch [System.Net.WebException] { }
+        if($status -ne 200) {
+            Write-Host "." -NoNewline
+            Start-Sleep 1
+        }
+    }
+
+    Write-Host
+    # Open the site.
+    Start-Process $url
+}
+
 # Call the correct function for the parameter that was used
 if($DockerComposeBuild) {
     DockerComposeBuild
@@ -99,6 +122,7 @@ elseif($DockerComposeUp) {
 elseif($DockerComposeBuildUp) {
     DockerComposeBuild
     DockerComposeUp
+    OpenSite http://localhost:5000
 }
 elseif($DockerComposeMongoBuild) {
     DockerComposeMongoBuild
