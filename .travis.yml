@@ -17,10 +17,9 @@ install:
   - dotnet build test/MoviesApi.Tests/project.json
 
 script:
-  - dotnet test test/MoviesApi.Tests/project.json
+  - cd test/MoviesApi.Tests && dotnet test && cd ../..
   - docker-compose -f src/MoviesApi/docker-compose.yml up -d --build --force-recreate
   - docker-compose -f src/MoviesApi/docker-compose.yml ps
-  # - curl -I http://localhost:5000/server/api/movies
 
 after_script:
   - docker-compose -f src/MoviesApi/docker-compose.yml stop
